@@ -374,3 +374,9 @@ class SpanProxy(object):
 
     def __repr__(self):
         return '<SpanProxy(span=%r)>' % (self._span, )
+
+    def __bool__(self):
+        return self._span is not None
+
+    # For Python 2.7 support
+    __nonzero__ = __bool__
