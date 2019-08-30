@@ -339,3 +339,38 @@ _SystemRandom = random.SystemRandom()
 def _new_id():
     """Generate a random trace_id or span_id"""
     return _SystemRandom.getrandbits(64)
+
+
+class SpanProxy(object):
+    __slots__ = ('_span', )
+
+    def __init__(self, span):
+        self._span = span
+
+    def __getattr__(self, name):
+        if name in ('_span', ):
+            return object.__getattribute__(self, name)
+        elif self._span:
+            return object.__getattribute__(self._span, name)
+        elif callable(getattr(Span, name, None)):
+            def noop(*args, **kwargs):
+                pass
+
+            return noop
+        return None
+
+    def __setattr__(self, name, value):
+        if name in ('_span', ):
+            return object.__setattr__(self, name, value)
+        elif self._span:
+            return object.__setattr__(self._span, name, value)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self._span:
+            return self._span.__exit__(exc_type, exc_val, exc_tb)
+
+    def __repr__(self):
+        return '<SpanProxy(span=%r)>' % (self._span, )
