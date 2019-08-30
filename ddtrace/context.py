@@ -4,6 +4,7 @@ from .constants import HOSTNAME_KEY, SAMPLING_PRIORITY_KEY, ORIGIN_KEY
 from .internal.logger import get_logger
 from .internal import hostname
 from .settings import config
+from .span import NoopSpan
 from .utils.formats import asbool, get_env
 
 log = get_logger(__name__)
@@ -86,7 +87,7 @@ class Context(object):
         """
         Return the root span of the context or None if it does not exist.
         """
-        return self._trace[0] if len(self._trace) > 0 else None
+        return self._trace[0] if len(self._trace) > 0 else NoopSpan()
 
     def get_current_span(self):
         """
@@ -96,7 +97,7 @@ class Context(object):
         earlier while child spans still need to finish their traced execution.
         """
         with self._lock:
-            return self._current_span
+            return self._current_span or NoopSpan()
 
     def _set_current_span(self, span):
         """

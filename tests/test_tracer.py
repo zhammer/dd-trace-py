@@ -8,6 +8,7 @@ from unittest.case import SkipTest
 
 from ddtrace.ext import system
 from ddtrace.context import Context
+from ddtrace.span import NoopSpan
 
 from .base import BaseTracerTestCase
 from .utils.tracer import DummyTracer
@@ -297,7 +298,8 @@ class TracerTestCase(BaseTracerTestCase):
 
         self.assertIsNone(s2._parent)
         s2.finish()
-        self.assertIsNone(p1)
+
+        assert isinstance(p1, NoopSpan)
 
     def test_tracer_global_tags(self):
         s1 = self.trace('brie')
@@ -330,10 +332,10 @@ class TracerTestCase(BaseTracerTestCase):
         self.assertEqual(self.tracer.current_span(), span)
 
     def test_tracer_current_span_missing_context(self):
-        self.assertIsNone(self.tracer.current_span())
+        assert isinstance(self.tracer.current_span(), NoopSpan)
 
     def test_tracer_current_root_span_missing_context(self):
-        self.assertIsNone(self.tracer.current_root_span())
+        assert isinstance(self.tracer.current_root_span(), NoopSpan)
 
     def test_default_provider_get(self):
         # Tracer Context Provider must return a Context object
@@ -461,3 +463,31 @@ class TracerTestCase(BaseTracerTestCase):
         self.assertEqual(root.get_tag('language'), 'python')
 
         self.assertIsNone(child.get_tag('language'))
+
+    def test_current_span_no_context(self):
+        span = self.tracer.current_span()
+        assert isinstance(span, NoopSpan)
+
+        assert span.context is None
+        assert span.tracer() is None
+        assert span.name is None
+
+        # Closing the span doesn't cause any errors
+        span.finish()
+
+        # Ensure nothing got closed/flushed
+        self.assert_has_no_spans()
+
+    def test_current_root_span_no_context(self):
+        span = self.tracer.current_root_span()
+        assert isinstance(span, NoopSpan)
+
+        assert span.context is None
+        assert span.tracer() is None
+        assert span.name is None
+
+        # Closing the span doesn't cause any errors
+        span.finish()
+
+        # Ensure nothing got closed/flushed
+        self.assert_has_no_spans()

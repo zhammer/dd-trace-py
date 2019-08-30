@@ -4,7 +4,7 @@ from unittest.case import SkipTest
 
 from ddtrace.context import Context
 from ddtrace.constants import ANALYTICS_SAMPLE_RATE_KEY
-from ddtrace.span import Span
+from ddtrace.span import Span, NoopSpan
 from ddtrace.ext import errors, priority
 from .base import BaseTracerTestCase
 
@@ -306,3 +306,11 @@ class SpanTestCase(BaseTracerTestCase):
         s.set_tag('custom.key', None)
 
         assert s.meta == {'custom.key': 'None'}
+
+
+class NoopSpanTestCase(BaseTracerTestCase):
+    def test_ids(self):
+        span = NoopSpan()
+        assert span.trace_id > 0
+        assert span.span_id > 0
+        assert span.parent_id is None

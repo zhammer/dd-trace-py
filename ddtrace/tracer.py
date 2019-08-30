@@ -10,7 +10,7 @@ from .internal.runtime import RuntimeTags, RuntimeWorker
 from .provider import DefaultContextProvider
 from .context import Context
 from .sampler import AllSampler, RateSampler, RateByServiceSampler
-from .span import Span, SpanProxy
+from .span import Span, NoopSpan
 from .utils.formats import get_env
 from .utils.deprecation import deprecated
 from .vendor.dogstatsd import DogStatsd
@@ -396,8 +396,8 @@ class Tracer(object):
         """
         ctx = self.get_call_context()
         if ctx:
-            return SpanProxy(ctx.get_current_root_span())
-        return SpanProxy(None)
+            return ctx.get_current_root_span()
+        return NoopSpan()
 
     def current_span(self):
         """
@@ -406,8 +406,8 @@ class Tracer(object):
         """
         ctx = self.get_call_context()
         if ctx:
-            return SpanProxy(ctx.get_current_span())
-        return SpanProxy(None)
+            return ctx.get_current_span()
+        return NoopSpan()
 
     def record(self, context):
         """

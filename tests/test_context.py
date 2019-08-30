@@ -75,7 +75,7 @@ class TestTracingContext(BaseTestCase):
     def test_current_root_span_none(self):
         # it should return none when there is no root span
         ctx = Context()
-        assert ctx.get_current_root_span() is None
+        assert isinstance(ctx.get_current_root_span(), NoopSpan)
 
     def test_current_root_span(self):
         # it should return the current active root span

@@ -144,10 +144,12 @@ class Span(object):
 
             return
         elif key == MANUAL_KEEP_KEY:
-            self.context.sampling_priority = priority.USER_KEEP
+            if self._context:
+                self._context.sampling_priority = priority.USER_KEEP
             return
         elif key == MANUAL_DROP_KEY:
-            self.context.sampling_priority = priority.USER_REJECT
+            if self._context:
+                self._context.sampling_priority = priority.USER_REJECT
             return
 
         try:
@@ -325,7 +327,8 @@ class Span(object):
             log.exception('error closing trace')
 
     def __repr__(self):
-        return '<Span(id=%s,trace_id=%s,parent_id=%s,name=%s)>' % (
+        return '<%s(id=%s,trace_id=%s,parent_id=%s,name=%s)>' % (
+            self.__class__.__name__,
             self.span_id,
             self.trace_id,
             self.parent_id,
@@ -341,42 +344,14 @@ def _new_id():
     return _SystemRandom.getrandbits(64)
 
 
-class SpanProxy(object):
-    __slots__ = ('_span', )
-
-    def __init__(self, span):
-        self._span = span
-
-    def __getattr__(self, name):
-        if name in ('_span', ):
-            return object.__getattribute__(self, name)
-        elif self._span:
-            return object.__getattribute__(self._span, name)
-        elif callable(getattr(Span, name, None)):
-            def noop(*args, **kwargs):
-                pass
-
-            return noop
-        return None
-
-    def __setattr__(self, name, value):
-        if name in ('_span', ):
-            return object.__setattr__(self, name, value)
-        elif self._span:
-            return object.__setattr__(self._span, name, value)
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        if self._span:
-            return self._span.__exit__(exc_type, exc_val, exc_tb)
-
-    def __repr__(self):
-        return '<SpanProxy(span=%r)>' % (self._span, )
+class NoopSpan(Span):
+    def __init__(self, *args, **kwargs):
+        super(NoopSpan, self).__init__(tracer=None, name=None)
 
     def __bool__(self):
-        return self._span is not None
+        return False
 
-    # For Python 2.7 support
     __nonzero__ = __bool__
+
+    def __repr__(self):
+        return '<{}()>'.format(self.__class__.__name__)
