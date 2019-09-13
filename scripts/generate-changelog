@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+import json
+import textwrap
+import urllib.parse
+import urllib.request
+
+
+def get_releases():
+    page = 0
+
+    while True:
+        page += 1
+        params = urllib.parse.urlencode(dict(page=page))
+        url = f'https://api.github.com/repos/datadog/dd-trace-py/releases?{params}'
+        with urllib.request.urlopen(url) as res:
+            if res.status != 200:
+                print(f'Response status is {res.status} for {url}')
+                break
+
+            releases = json.load(res)
+            if not releases:
+                break
+
+            for release in releases:
+                if release['draft'] or release['prerelease']:
+                    continue
+
+                yield release
+
+
+def main():
+    with open('CHANGELOG.md', 'w') as changelog:
+        for release in get_releases():
+            changelog.write(textwrap.dedent(f"""
+            <details>
+              <summary>
+                <h1>[{release['tag_name']}]({release['html_url']}) - {release['published_at']}</h1>
+              </summary>
+
+              {release['body']}
+            </details>
+            """))
+
+
+if __name__ == '__main__':
+    main()
