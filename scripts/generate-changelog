@@ -32,7 +32,8 @@ def main():
     with open('CHANGELOG.md', 'w') as changelog:
         for release in get_releases():
             changelog.write(f"""
-<details><summary>[{release['tag_name']}]({release['html_url']}) - {release['published_at']}</summary>
+<details><summary><a href="{release['html_url']}>{release['tag_name']}</a> - {release['published_at']}</summary>
+
 {release['body']}
 </details>
             """)
