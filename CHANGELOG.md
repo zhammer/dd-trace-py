@@ -1,5 +1,5 @@
 
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.29.0>v0.29.0</a> - 2019-09-05T17:25:17Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.29.0">v0.29.0</a> - 2019-09-05T17:25:17Z</summary>
 
 ## Upgrading to 0.29.0
 
@@ -30,7 +30,7 @@ This release introduces a new contextvars-based context manager in Python 3.7 an
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.28.0...v0.29.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/45?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.28.0>v0.28.0</a> - 2019-08-16T16:45:24Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.28.0">v0.28.0</a> - 2019-08-16T16:45:24Z</summary>
 
 ## Upgrading to 0.28.0
 
@@ -62,7 +62,7 @@ This release introduces container tagging and adds support for gRPC server.
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.27.1...v0.28.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/44?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.27.1>v0.27.1</a> - 2019-07-25T12:32:35Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.27.1">v0.27.1</a> - 2019-07-25T12:32:35Z</summary>
 
 # Upgrading to 0.27.1
 
@@ -75,7 +75,7 @@ This patch release includes performance fix which is highly recommended for anyo
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.27.0...v0.27.1)
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.27.0>v0.27.0</a> - 2019-07-12T18:45:44Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.27.0">v0.27.0</a> - 2019-07-12T18:45:44Z</summary>
 
 ## Upgrading to 0.27.0
 
@@ -107,7 +107,7 @@ This release introduces improvements to the trace writer. In addition, the relea
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.26.0...v0.27.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/43?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.26.0>v0.26.0</a> - 2019-06-05T18:49:55Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.26.0">v0.26.0</a> - 2019-06-05T18:49:55Z</summary>
 
 ## Upgrading to 0.26.0
 
@@ -154,7 +154,7 @@ This release introduces several core improvements and continues addressing pain 
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.25.0...v0.26.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/42?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.25.0>v0.25.0</a> - 2019-05-07T16:22:39Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.25.0">v0.25.0</a> - 2019-05-07T16:22:39Z</summary>
 
 ## Upgrading to 0.25.0
 
@@ -193,7 +193,7 @@ This release includes several core improvements and addresses pain points in our
 - [internal] Add and use RuntimeWorker.join() to remove race condition in testing (#887)
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0>v0.24.0</a> - 2019-04-15T17:57:49Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.24.0">v0.24.0</a> - 2019-04-15T17:57:49Z</summary>
 
 ## Upgrading to 0.24.0
 
@@ -238,7 +238,7 @@ This release introduces a new feature (disabled by default), supports new versio
 - [tests] Fix requests gevent tests (#854)
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.23.0>v0.23.0</a> - 2019-03-19T18:53:31Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.23.0">v0.23.0</a> - 2019-03-19T18:53:31Z</summary>
 
 ## Upgrading to 0.23.0
 
@@ -260,7 +260,7 @@ With this release we are introducing a new configuration system across integrati
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.22.0...v0.23.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/39?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0>v0.22.0</a> - 2019-03-01T19:00:53Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.22.0">v0.22.0</a> - 2019-03-01T19:00:53Z</summary>
 
 ## Upgrading to 0.22.0
 
@@ -276,7 +276,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.21.1
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.21.1>v0.21.1</a> - 2019-02-21T21:57:40Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.21.1">v0.21.1</a> - 2019-02-21T21:57:40Z</summary>
 
 ## Upgrading to 0.21.1
 
@@ -294,7 +294,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.21.0
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.21.0>v0.21.0</a> - 2019-02-19T17:20:31Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.21.0">v0.21.0</a> - 2019-02-19T17:20:31Z</summary>
 
 ## Upgrading to 0.21.0
 
@@ -320,7 +320,7 @@ With this release we are moving distributed tracing settings to be enabled by de
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.20.4...v0.21) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/35?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.20.4>v0.20.4</a> - 2019-02-08T17:35:51Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.20.4">v0.20.4</a> - 2019-02-08T17:35:51Z</summary>
 
 ## Upgrading to 0.20.4
 
@@ -336,7 +336,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.20.3
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.20.3>v0.20.3</a> - 2019-02-04T20:07:58Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.20.3">v0.20.3</a> - 2019-02-04T20:07:58Z</summary>
 
 ## Upgrading to 0.20.3
 
@@ -351,7 +351,7 @@ This release includes a fix for context propagation with `futures`. Under the ri
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.20.2...v0.20.3) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/37?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.20.2>v0.20.2</a> - 2019-01-29T21:47:49Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.20.2">v0.20.2</a> - 2019-01-29T21:47:49Z</summary>
 
 ## Upgrading to 0.20.2
 
@@ -371,7 +371,7 @@ This big fix release includes changes to ensure we properly read the HTTP respon
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.20.1...v0.20.2) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/36?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.20.1>v0.20.1</a> - 2019-01-17T14:13:18Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.20.1">v0.20.1</a> - 2019-01-17T14:13:18Z</summary>
 
 ## Upgrading to 0.20.1
 
@@ -384,7 +384,7 @@ No changes are needed to upgrade
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.20.0...v0.20.1) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/36?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.20.0>v0.20.0</a> - 2019-01-09T19:10:40Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.20.0">v0.20.0</a> - 2019-01-09T19:10:40Z</summary>
 
 # Upgrading to 0.20.0
 
@@ -403,7 +403,7 @@ We have added support for logs injection to the tracer. If you are already using
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.19.0...v0.20.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/34?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.19.0>v0.19.0</a> - 2018-12-28T19:16:44Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.19.0">v0.19.0</a> - 2018-12-28T19:16:44Z</summary>
 
 ## Upgrading to 0.19.0
 
@@ -435,7 +435,7 @@ config.dbapi2.trace_fetch_methods = True
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.18.0...v0.19.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/32?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.18.0>v0.18.0</a> - 2018-12-12T21:12:57Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.18.0">v0.18.0</a> - 2018-12-12T21:12:57Z</summary>
 
 ## New Integrations
 
@@ -465,7 +465,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.18.0
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.17.1...v0.18.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/30?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.17.1>v0.17.1</a> - 2018-12-05T21:51:11Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.17.1">v0.17.1</a> - 2018-12-05T21:51:11Z</summary>
 
 This release includes the removal of service sending, this should resolve many of the 400s that are being returned from the Agent resulting in an unfriendly `ERROR` message and giving the impression that the tracer is failing. (#757)
 
@@ -477,7 +477,7 @@ This release includes the removal of service sending, this should resolve many o
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.17.0...v0.17.1) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/31?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.17.0>v0.17.0</a> - 2018-11-28T17:37:20Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.17.0">v0.17.0</a> - 2018-11-28T17:37:20Z</summary>
 
 ## New features
 - [redis] add support for redis 3.0.0 (#716)
@@ -509,7 +509,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.17.0
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.16.0...v0.17.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/29?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.16.0>v0.16.0</a> - 2018-11-13T16:18:47Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.16.0">v0.16.0</a> - 2018-11-13T16:18:47Z</summary>
 
 ## New Integrations
 * [jinja2] Add jinja2 integration (#649 -- thanks @mgu)
@@ -540,7 +540,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.15.0
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.15.0>v0.15.0</a> - 2018-10-16T19:01:55Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.15.0">v0.15.0</a> - 2018-10-16T19:01:55Z</summary>
 
 **New integrations**
 
@@ -572,7 +572,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.15.0
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.14.1...v0.15.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/25?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.14.1>v0.14.1</a> - 2018-09-25T16:05:12Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.14.1">v0.14.1</a> - 2018-09-25T16:05:12Z</summary>
 
 **Bug fixes**
 - [opentracer] Activate span context on extract (#606, #608)
@@ -589,7 +589,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.14.1
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.14.0...v0.14.1) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/27?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.14.0>v0.14.0</a> - 2018-09-11T18:28:55Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.14.0">v0.14.0</a> - 2018-09-11T18:28:55Z</summary>
 
 **OpenTracing**
 
@@ -618,7 +618,7 @@ Thanks @labbati!
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.13.1...v0.14.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/20?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.13.1>v0.13.1</a> - 2018-09-04T15:48:39Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.13.1">v0.13.1</a> - 2018-09-04T15:48:39Z</summary>
 
 **Bug fixes**
 
@@ -627,7 +627,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.13.1
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.13.0...v0.13.1) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/24?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.13.0>v0.13.0</a> - 2018-08-23T12:53:23Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.13.0">v0.13.0</a> - 2018-08-23T12:53:23Z</summary>
 
 **New integrations**
 - [`pymemcache`](https://github.com/pinterest/pymemcache) integration (#511)
@@ -663,7 +663,7 @@ Using the signal based approach increase the stability of our instrumentation, b
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.12.1...v0.13.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/21?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.12.1>v0.12.1</a> - 2018-06-14T09:08:28Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.12.1">v0.12.1</a> - 2018-06-14T09:08:28Z</summary>
 
 **Bugfixes**
 
@@ -683,7 +683,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.12.1
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.12.0...v0.12.1) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/19?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.12.0>v0.12.0</a> - 2018-05-03T12:04:59Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.12.0">v0.12.0</a> - 2018-05-03T12:04:59Z</summary>
 
 **New integrations**
 * [boto] Botocore and boto instrumentation is enabled by default using `patch_all()` (#319)
@@ -708,7 +708,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.12.0
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.11.1...v0.12.0) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/17?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.11.1>v0.11.1</a> - 2018-03-30T09:47:54Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.11.1">v0.11.1</a> - 2018-03-30T09:47:54Z</summary>
 
 **Improvements**
 
@@ -723,7 +723,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.11.1
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.11.0...v0.11.1) and the [release milestone](https://github.com/DataDog/dd-trace-py/milestone/18?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.11.0>v0.11.0</a> - 2018-03-05T10:50:23Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.11.0">v0.11.0</a> - 2018-03-05T10:50:23Z</summary>
 
 **Security fixes**
 
@@ -746,7 +746,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.11.0
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.10.1...v0.11.0) and [0.11.0 milestone](https://github.com/DataDog/dd-trace-py/milestone/15?closed=1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.10.1>v0.10.1</a> - 2018-02-05T14:17:49Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.10.1">v0.10.1</a> - 2018-02-05T14:17:49Z</summary>
 
 **Distributed Tracing**
 Add distributed tracing using integration settings for the following libraries/frameworks:
@@ -772,7 +772,7 @@ Add distributed tracing using integration settings for the following libraries/f
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.10.0...v0.10.1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.10.0>v0.10.0</a> - 2017-11-08T17:59:28Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.10.0">v0.10.0</a> - 2017-11-08T17:59:28Z</summary>
 
 **Distributed Sampling (beta)**
 
@@ -791,7 +791,7 @@ New feature that propagates the sampling priority across services. This is usefu
 Read the full [changeset](https://github.com/DataDog/dd-trace-py/compare/v0.9.2...v0.10.0)
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.9.2>v0.9.2</a> - 2017-09-12T13:24:39Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.9.2">v0.9.2</a> - 2017-09-12T13:24:39Z</summary>
 
 **New features**
 * [django] disable database or cache instrumentation via settings so that each Django component instrumentation can be disabled (#314, [docs](http://localhost:8000/#module-ddtrace.contrib.django) -- thanks @mcanaves)
@@ -817,7 +817,7 @@ Read the full [changeset](https://github.com/DataDog/dd-trace-py/compare/v0.9.2.
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.9.1...v0.9.2).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.9.1>v0.9.1</a> - 2017-08-01T11:29:46Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.9.1">v0.9.1</a> - 2017-08-01T11:29:46Z</summary>
 
 **New features**
 * [core] add a processing pipeline to the `AsyncWorker`, so that traces can be filtered easily. This change doesn't have any performance impact with existing installations, and is expected to work well with async frameworks / libraries (#303, [docs](http://pypi.datadoghq.com/trace/docs/#trace-filtering))
@@ -834,7 +834,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.9.1.
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.9.0...v0.9.1).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.9.0>v0.9.0</a> - 2017-07-05T12:20:40Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.9.0">v0.9.0</a> - 2017-07-05T12:20:40Z</summary>
 
 **New features**
 
@@ -865,7 +865,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.9.0.
 Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.8.5...v0.9.0).
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.5>v0.8.5</a> - 2017-05-30T16:17:19Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.5">v0.8.5</a> - 2017-05-30T16:17:19Z</summary>
 
 **Bugfixes**
 
@@ -878,14 +878,14 @@ Read the [full changeset][1].
 [1]: https://github.com/DataDog/dd-trace-py/compare/v0.8.4...v0.8.5
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.4>v0.8.4</a> - 2017-05-19T09:27:43Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.4">v0.8.4</a> - 2017-05-19T09:27:43Z</summary>
 
 **Bugfixes**
 
 * [flask] avoid using weak references when Flask is instrumented via Blinker. This resolves initialization issues when the `traced_app = TraceMiddleware(app, ...)` reference goes out of the scope or is garbage collected (#273)
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.3>v0.8.3</a> - 2017-05-15T11:17:17Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.3">v0.8.3</a> - 2017-05-15T11:17:17Z</summary>
 
 **Improvements**
 
@@ -904,7 +904,7 @@ Read the [full changeset][1]
 [1]: https://github.com/DataDog/dd-trace-py/compare/v0.8.2...v0.8.3
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.2>v0.8.2</a> - 2017-04-28T15:43:49Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.2">v0.8.2</a> - 2017-04-28T15:43:49Z</summary>
 
 **Bugfixes**
 
@@ -915,7 +915,7 @@ Read the [full changeset][1]
 [1]: https://github.com/DataDog/dd-trace-py/compare/v0.8.1...v0.8.2
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.1>v0.8.1</a> - 2017-05-30T16:16:15Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.1">v0.8.1</a> - 2017-05-30T16:16:15Z</summary>
 
 **Bugfixes**
 
@@ -927,7 +927,7 @@ Read the [full changeset][1].
 [1]: https://github.com/DataDog/dd-trace-py/compare/v0.8.0...v0.8.1
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.0>v0.8.0</a> - 2017-04-10T17:19:35Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.8.0">v0.8.0</a> - 2017-04-10T17:19:35Z</summary>
 
 **New integrations**
 * Add support for Tornado web `4.0+`. Currently this integration is ignored by autopatching, but can be enabled via `patch_all(tornado=True)` (#204, [docs][1] -- thanks @ross for reviewing and testing the implementation)
@@ -962,7 +962,7 @@ Read the [full changeset][2].
 [2]: https://github.com/DataDog/dd-trace-py/compare/v0.7.0...v0.8.0
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.7.0>v0.7.0</a> - 2017-03-29T18:08:09Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.7.0">v0.7.0</a> - 2017-03-29T18:08:09Z</summary>
 
 **New integrations**
 * Add support for `boto` (>=2.29.0) and `botocore` (>= 1.4.51) #209 . Currently these integrations are ignored by autopatching, but can be enabled via `patch_all(boto=True, botocore=True)`
@@ -976,7 +976,7 @@ Read the [full changeset][2].
 * [pyramid] Ensure pyramid spans have method and route metadata consistent with other web frameworks #220 (thanks @johnpkennedy)
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.6.0>v0.6.0</a> - 2017-03-09T13:47:35Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.6.0">v0.6.0</a> - 2017-03-09T13:47:35Z</summary>
 
 **New integrations**
 * Add support for asynchronous Python. This is a major improvement that adds support for `asyncio`, `aiohttp` and `gevent` (#161, docs: [asyncio][1] - [aiohttp][2] - [gevent][3])
@@ -1020,7 +1020,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.5.5.
 [9]: http://pypi.datadoghq.com/trace/docs/#advanced-usage
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.5>v0.5.5</a> - 2017-02-15T15:29:56Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.5">v0.5.5</a> - 2017-02-15T15:29:56Z</summary>
 
 **Improvements**
 - ElasticSearch integration takes care of the returning status code in case of a `TransportError` (#175)
@@ -1032,7 +1032,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.5.4.
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.4>v0.5.4</a> - 2017-02-14T19:50:33Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.4">v0.5.4</a> - 2017-02-14T19:50:33Z</summary>
 
 ## Integrations
 - added the Pyramid web framework
@@ -1050,7 +1050,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.5.3.
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.3>v0.5.3</a> - 2016-12-23T08:50:32Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.3">v0.5.3</a> - 2016-12-23T08:50:32Z</summary>
 
 **Bugfixes**
 - [ElasticSearch] use ElasticSearch serializer so that the serialization works with dates, decimals and UUIDs #131 
@@ -1064,7 +1064,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.5.2.
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.2>v0.5.2</a> - 2016-12-14T22:24:39Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.2">v0.5.2</a> - 2016-12-14T22:24:39Z</summary>
 
 0.5.2 is a bugfix release.
 
@@ -1075,7 +1075,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.5.1.
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.1>v0.5.1</a> - 2016-12-13T04:21:44Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.1">v0.5.1</a> - 2016-12-13T04:21:44Z</summary>
 
 0.5.1 is a bugfix release.
 
@@ -1088,7 +1088,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.5.0.
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.0>v0.5.0</a> - 2016-12-07T10:40:02Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.5.0">v0.5.0</a> - 2016-12-07T10:40:02Z</summary>
 
 **Major changes**
 - added`msgpack-python` as a dependency
@@ -1104,7 +1104,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.4.0.
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.4.0>v0.4.0</a> - 2016-11-26T23:35:40Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.4.0">v0.4.0</a> - 2016-11-26T23:35:40Z</summary>
 
 0.4.0 is a "major" release of the `dd-trace-py`. Please test thoroughly on staging before rolling out to your production clusters.
 
@@ -1127,7 +1127,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.3.16
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.16>v0.3.16</a> - 2016-11-03T23:30:02Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.16">v0.3.16</a> - 2016-11-03T23:30:02Z</summary>
 
 ### Bugfixes
 - Handle memory leaks when tracing happens in a forked process (Issue #84) 
@@ -1144,7 +1144,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.3.15
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.15>v0.3.15</a> - 2016-11-01T01:51:56Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.15">v0.3.15</a> - 2016-11-01T01:51:56Z</summary>
 
 ### Integrations
 - add tracing for the requests library
@@ -1153,7 +1153,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.3.14
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/0.3.14>0.3.14</a> - 2016-09-30T12:39:21Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/0.3.14">0.3.14</a> - 2016-09-30T12:39:21Z</summary>
 
 ### Integrations
 - [pylons] allow users to set resources inside handlers
@@ -1166,7 +1166,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.3.13
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.13>v0.3.13</a> - 2016-09-21T20:53:35Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.13">v0.3.13</a> - 2016-09-21T20:53:35Z</summary>
 
 ### New integrations
 - added `pylibmc` Memcached client integration
@@ -1176,14 +1176,14 @@ Read the full [changeset](https://github.com/DataDog/dd-trace-py/compare/v0.3.12
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.12>v0.3.12</a> - 2016-09-14T09:26:37Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.12">v0.3.12</a> - 2016-09-14T09:26:37Z</summary>
 
 [change set](https://github.com/DataDog/dd-trace-py/compare/v0.3.11...v0.3.12)
 - Added MySQL integration, using [mysql.connector](https://dev.mysql.com/doc/connector-python/en/) v2.1
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.11>v0.3.11</a> - 2016-08-31T13:29:19Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.11">v0.3.11</a> - 2016-08-31T13:29:19Z</summary>
 
 ## Bugfixes
 - fixed an unpacking error for `elasticsearch>=2.4`
@@ -1197,7 +1197,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.3.10
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.10>v0.3.10</a> - 2016-08-22T17:03:50Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.10">v0.3.10</a> - 2016-08-22T17:03:50Z</summary>
 
 [change set](https://github.com/DataDog/dd-trace-py/compare/v0.3.9...v0.3.10)
 - add `flask_cache` integration; supporting the `0.12` and `0.13` versions
@@ -1205,14 +1205,14 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.3.10
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.9>v0.3.9</a> - 2016-08-12T21:12:41Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.9">v0.3.9</a> - 2016-08-12T21:12:41Z</summary>
 
 [change set](https://github.com/DataDog/dd-trace-py/compare/v0.3.8...v0.3.9)
 - send service info from the sqlalchemy integration
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.7>v0.3.7</a> - 2016-08-12T17:01:19Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.7">v0.3.7</a> - 2016-08-12T17:01:19Z</summary>
 
 [change set](https://github.com/DataDog/dd-trace-py/compare/v0.3.6...v0.3.7)
 - Released Falcon Integration
@@ -1220,7 +1220,7 @@ Read the [full changeset](https://github.com/DataDog/dd-trace-py/compare/v0.3.10
 
 </details>
             
-<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.8>v0.3.8</a> - 2016-08-12T17:00:35Z</summary>
+<details><summary><a href="https://github.com/DataDog/dd-trace-py/releases/tag/v0.3.8">v0.3.8</a> - 2016-08-12T17:00:35Z</summary>
 
 [change set](https://github.com/DataDog/dd-trace-py/compare/v0.3.7...v0.3.8)
 - Added support for the most recent bugfix versions of pymongo 3.0, 3.1 and 3.2
