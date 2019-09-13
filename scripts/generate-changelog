@@ -31,15 +31,11 @@ def get_releases():
 def main():
     with open('CHANGELOG.md', 'w') as changelog:
         for release in get_releases():
-            changelog.write(textwrap.dedent(f"""
-            <details>
-              <summary>
-                <h1>[{release['tag_name']}]({release['html_url']}) - {release['published_at']}</h1>
-              </summary>
-
-              {release['body']}
-            </details>
-            """))
+            changelog.write(f"""
+<details><summary>[{release['tag_name']}]({release['html_url']}) - {release['published_at']}</summary>
+{release['body']}
+</details>
+            """)
 
 
 if __name__ == '__main__':
