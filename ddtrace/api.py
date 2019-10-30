@@ -218,7 +218,7 @@ class API(object):
                     # If payload is not empty, then using a new Payload might allow us to fit the trace.
                     # Let's flush the Payload and try to put the trace in a new empty Payload.
                     if not payload.empty:
-                        responses.append(self._flush(payload))
+                        responses.append((self._flush(payload), payload))
                         # Create a new payload
                         payload = Payload(encoder=self._encoder)
                         try:
@@ -231,7 +231,7 @@ class API(object):
             # Check that the Payload is not empty:
             # it could be empty if the last trace was too big to fit.
             if not payload.empty:
-                responses.append(self._flush(payload))
+                responses.append((self._flush(payload), payload))
 
         log.debug('reported %d traces in %.5fs', len(traces), sw.elapsed())
 

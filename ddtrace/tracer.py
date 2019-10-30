@@ -8,6 +8,7 @@ from .ext import system
 from .ext.priority import AUTO_REJECT, AUTO_KEEP
 from .internal.logger import get_logger
 from .internal.runtime import RuntimeTags, RuntimeWorker
+from .internal.runtime.tag_collectors import PlatformTagCollector
 from .internal.writer import AgentWriter
 from .provider import DefaultContextProvider
 from .context import Context
@@ -220,6 +221,13 @@ class Tracer(object):
             dogstatsd_kwargs = _parse_dogstatsd_url(dogstatsd_url)
             self.log.debug('Connecting to DogStatsd({})'.format(dogstatsd_url))
             self._dogstatsd_client = DogStatsd(**dogstatsd_kwargs)
+            # Default required constant tags
+            # DEV: We need these set on tracer initialization for health metrics
+            # DEV: self._update_dogstatsd_tags() will reset these, but they include PlatformTagCollector tags
+            self._dogstatsd_client.constant_tags = [
+                '{}:{}'.format(k, v)
+                for k, v in PlatformTagCollector().collect()
+            ]
 
         if hostname is not None or port is not None or uds_path is not None or https is not None or \
                 filters is not None or priority_sampling is not None:

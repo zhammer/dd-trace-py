@@ -1,3 +1,5 @@
+import math
+
 from .encoding import get_encoder
 
 
@@ -16,7 +18,13 @@ class Payload(object):
     DEV: We encoded and buffer traces so that we can reliable determine the size of
          the payload easily so we can flush based on the payload size.
     """
-    __slots__ = ('traces', 'size', 'encoder', 'max_payload_size')
+    __slots__ = (
+        'traces',
+        'size',
+        'encoder',
+        'max_payload_size',
+        'spans',
+    )
 
     # Trace agent limit payload size of 10 MB
     # 5 MB should be a good average efficient size
@@ -35,6 +43,7 @@ class Payload(object):
         self.encoder = encoder or get_encoder()
         self.traces = []
         self.size = 0
+        self.spans = 0
 
     def add_trace(self, trace):
         """
@@ -51,8 +60,20 @@ class Payload(object):
         encoded = self.encoder.encode_trace(trace)
         if len(encoded) + self.size > self.max_payload_size:
             raise PayloadFull()
+
         self.traces.append(encoded)
         self.size += len(encoded)
+        self.spans += len(trace)
+
+    @property
+    def stats(self):
+        """
+        Get statistics from this Payload
+
+        :returns: Tuple of ("size in bytes", "total traces", "total spans")
+        :rtype: :obj:`tuple`(:obj:`int`, :obj:`int`, :obj:`int`)
+        """
+        return (self.size, len(self.traces), self.spans)
 
     @property
     def length(self):
@@ -86,5 +107,5 @@ class Payload(object):
 
     def __repr__(self):
         """Get the string representation of this payload"""
-        return '{0}(length={1}, size={2} B, max_payload_size={3} B)'.format(
-            self.__class__.__name__, self.length, self.size, self.max_payload_size)
+        return '{0}(traces={1}, spans={2}, size={3} B, max_payload_size={4} B)'.format(
+            self.__class__.__name__, self.length, self.spans, self.size, self.max_payload_size)

@@ -1,12 +1,13 @@
 # stdlib
 import itertools
+import math
 import random
 import time
 
 from .. import api
 from .. import _worker
-from ..utils import sizeof
 from ..internal.logger import get_logger
+from ..settings import config
 from ..vendor import monotonic
 from ddtrace.vendor.six.moves.queue import Queue, Full, Empty
 
@@ -23,9 +24,6 @@ class AgentWriter(_worker.PeriodicWorkerThread):
 
     QUEUE_PROCESSING_INTERVAL = 1
 
-    _ENABLE_STATS = False
-    _STATS_EVERY_INTERVAL = 10
-
     def __init__(self, hostname='localhost', port=8126, uds_path=None, https=False,
                  shutdown_timeout=DEFAULT_TIMEOUT,
                  filters=None, priority_sampler=None,
@@ -40,7 +38,6 @@ class AgentWriter(_worker.PeriodicWorkerThread):
         self.dogstatsd = dogstatsd
         self.api = api.API(hostname, port, uds_path=uds_path, https=https,
                            priority_sampling=priority_sampler is not None)
-        self._stats_rate_counter = 0
         self.start()
 
     def recreate(self):
@@ -60,41 +57,54 @@ class AgentWriter(_worker.PeriodicWorkerThread):
             dogstatsd=self.dogstatsd,
         )
 
+    @property
     def _send_stats(self):
-        """Determine if we're sending stats or not.
-
-        This leverages _STATS_EVERY_INTERVAL to send metrics only after this amount of interval has elapsed.
-        """
-        if not self._ENABLE_STATS:
-            return False
-
-        if not self.dogstatsd:
-            return False
-
-        self._stats_rate_counter += 1
-
-        if self._stats_rate_counter % self._STATS_EVERY_INTERVAL == 0:
-            self._stats_rate_counter = 1
-            return True
-
-        return False
+        """Determine if we're sending stats or not."""
+        return config.health_metrics_enabled and self.dogstatsd
 
     def write(self, spans=None, services=None):
         if spans:
             self._trace_queue.put(spans)
 
-    def flush_queue(self):
+    def run(self):
+        # Always send the heartbeat metric
+        if self.dogstatsd:
+            self.dogstatsd.gauge('datadog.tracer.heartbeat', 1)
+
         try:
             traces = self._trace_queue.get(block=False)
+            self.flush_queue(traces)
         except Empty:
+            pass
+
+        if not self._send_stats:
             return
 
-        send_stats = self._send_stats()
+        # Statistics about the queue max length
+        self.dogstatsd.gauge('datadog.tracer.queue.max_length', self._trace_queue.maxsize)
 
-        if send_stats:
-            traces_queue_length = len(traces)
-            traces_queue_size = sum(map(sizeof.sizeof, traces))
-            traces_queue_spans = sum(map(len, traces))
+        # Statistics about the rate at which spans are inserted in the queue
+        (
+            dropped, accepted, accepted_sum,
+            accepted_min, accepted_max, accepted_avg,
+        ) = self._trace_queue.reset_stats()
+        self.dogstatsd.histogram('datadog.tracer.queue.dropped.traces', dropped)
+        self.dogstatsd.increment('datadog.tracer.queue.dropped.traces.sum', dropped)
+        self.dogstatsd.histogram('datadog.tracer.queue.accepted.traces', accepted)
+        self.dogstatsd.increment('datadog.tracer.queue.accepted.traces.sum', accepted)
+        self.dogstatsd.gauge('datadog.tracer.queue.accepted.spans.sum', accepted_sum)
+        self.dogstatsd.gauge('datadog.tracer.queue.accepted.spans.min', accepted_min)
+        self.dogstatsd.gauge('datadog.tracer.queue.accepted.spans.max', accepted_max)
+        self.dogstatsd.gauge('datadog.tracer.queue.accepted.spans.avg', accepted_avg)
+
+        # Statistics about the writer thread
+        if hasattr(time, 'thread_time_ns'):
+            self.dogstatsd.histogram('datadog.tracer.writer.cpu_time', time.thread_time_ns())
+
+    def flush_queue(self, traces):
+        if self._send_stats:
+            traces_flush_length = len(traces)
+            traces_flush_spans = sum(map(len, traces))
 
         # Before sending the traces, make them go through the
         # filters
@@ -104,12 +114,14 @@ class AgentWriter(_worker.PeriodicWorkerThread):
             log.error('error while filtering traces: {0}'.format(err))
             return
 
-        if send_stats:
-            traces_filtered = len(traces) - traces_queue_length
+        if self._send_stats:
+            traces_filtered = len(traces) - traces_flush_length
 
         # If we have data, let's try to send it.
         traces_responses = self.api.send_traces(traces)
-        for response in traces_responses:
+        payload_stats = []
+        for response, payload in traces_responses:
+            payload_stats.append(payload.stats)
             if isinstance(response, Exception) or response.status >= 400:
                 self._log_error_status(response)
             elif self._priority_sampler:
@@ -120,42 +132,44 @@ class AgentWriter(_worker.PeriodicWorkerThread):
         # Dump statistics
         # NOTE: Do not use the buffering of dogstatsd as it's not thread-safe
         # https://github.com/DataDog/datadogpy/issues/439
-        if send_stats:
-            # Statistics about the queue length, size and number of spans
-            self.dogstatsd.gauge('datadog.tracer.queue.max_length', self._trace_queue.maxsize)
-            self.dogstatsd.gauge('datadog.tracer.queue.length', traces_queue_length)
-            self.dogstatsd.gauge('datadog.tracer.queue.size', traces_queue_size)
-            self.dogstatsd.gauge('datadog.tracer.queue.spans', traces_queue_spans)
-
-            # Statistics about the rate at which spans are inserted in the queue
-            dropped, enqueued, enqueued_lengths, enqueued_size = self._trace_queue.reset_stats()
-            self.dogstatsd.increment('datadog.tracer.queue.dropped', dropped)
-            self.dogstatsd.increment('datadog.tracer.queue.accepted', enqueued)
-            self.dogstatsd.increment('datadog.tracer.queue.accepted_lengths', enqueued_lengths)
-            self.dogstatsd.increment('datadog.tracer.queue.accepted_size', enqueued_size)
+        if self._send_stats:
+            # Statistics about this flush
+            self.dogstatsd.histogram('datadog.tracer.flush.traces', traces_flush_length)
+            self.dogstatsd.increment('datadog.tracer.flush.traces.sum', traces_flush_length)
+            self.dogstatsd.histogram('datadog.tracer.flush.spans', traces_flush_spans)
+            self.dogstatsd.increment('datadog.tracer.flush.spans.sum', traces_flush_spans)
 
             # Statistics about the filtering
-            self.dogstatsd.increment('datadog.tracer.traces.filtered', traces_filtered)
+            self._flush_stats('traces.filtered', traces_filtered)
 
             # Statistics about API
-            self.dogstatsd.increment('datadog.tracer.api.requests', len(traces_responses))
-            self.dogstatsd.increment('datadog.tracer.api.errors',
-                                     len(list(t for t in traces_responses
-                                              if isinstance(t, Exception))))
-            for status, grouped_responses in itertools.groupby(
-                    sorted((t for t in traces_responses if not isinstance(t, Exception)),
-                           key=lambda r: r.status),
-                    key=lambda r: r.status):
-                self.dogstatsd.increment('datadog.tracer.api.responses',
-                                         len(list(grouped_responses)),
-                                         tags=['status:%d' % status])
+            self._flush_stats('api.requests', len(traces_responses))
 
-            # Statistics about the writer thread
-            if hasattr(time, 'thread_time_ns'):
-                self.dogstatsd.increment('datadog.tracer.writer.cpu_time', time.thread_time_ns())
+            # Exceptions raised during API calls
+            # DEV: No successful HTTP call was made
+            errors = list(e for (e, p) in traces_responses if isinstance(e, Exception))
+            for error_type, grouped_errors in itertools.groupby(sorted((type(error).__name__ for error in errors))):
+                self._flush_stats('api.responses', len(list(grouped_errors)), tags=['error:%s' % (error_type, )])
 
-    run_periodic = flush_queue
-    on_shutdown = flush_queue
+            # HTTP API call response stats
+            # DEV: Even `status:500` is marked as a response here and not an "api.errors"
+            responses = list(r for (r, p) in traces_responses if not isinstance(r, Exception))
+            for status, grouped_statuses in itertools.groupby(sorted((r.status for r in responses))):
+                self._flush_stats('api.responses', len(list(grouped_statuses)), tags=['status:%s' % (status, )])
+
+            # Statistics about payloads
+            self._flush_stats('payloads', len(payload_stats))
+            for size, total_traces, total_spans in payload_stats:
+                self._flush_stats('payload.size', size)
+                self._flush_stats('payload.traces', total_traces)
+                self._flush_stats('payload.spans', total_spans)
+
+    run_periodic = run
+    on_shutdown = run
+
+    def _flush_stats(self, name, value, tags=None):
+        self.dogstatsd.histogram('datadog.tracer.flush.%s' % (name, ), value, tags=tags)
+        self.dogstatsd.increment('datadog.tracer.%s' % (name, ), value, tags=tags)
 
     def _log_error_status(self, response):
         log_level = log.debug
@@ -214,9 +228,13 @@ class Q(Queue):
         # Number of items accepted
         self.accepted = 0
         # Cumulative length of accepted items
-        self.accepted_lengths = 0
-        # Cumulative size of accepted items
-        self.accepted_size = 0
+        self.accepted_sum = 0
+        # Min length of accepted items
+        self.accepted_min = 0
+        # Max length of accepted items
+        self.accepted_max = 0
+        # Avg length of accepted items
+        self.accepted_avg = 0
 
     def put(self, item):
         try:
@@ -248,8 +266,11 @@ class Q(Queue):
             item_length = len(item)
         else:
             item_length = 1
-        self.accepted_lengths += item_length
-        self.accepted_size += sizeof.sizeof(item)
+
+        self.accepted_sum += item_length
+        self.accepted_min = min(self.accepted_min, item_length) if self.accepted_min > 0 else item_length
+        self.accepted_max = max(self.accepted_max, item_length) if self.accepted_max > 0 else item_length
+        self.accepted_avg = math.ceil(self.accepted_sum / float(self.accepted))
 
     def reset_stats(self):
         """Reset the stats to 0.
@@ -257,11 +278,15 @@ class Q(Queue):
         :return: The current value of dropped, accepted and accepted_lengths.
         """
         with self.mutex:
-            dropped, accepted, accepted_lengths, accepted_size = (
-                self.dropped, self.accepted, self.accepted_lengths, self.accepted_size
+            dropped, accepted, accepted_sum, accepted_min, accepted_max, accepted_avg = (
+                self.dropped, self.accepted, self.accepted_sum,
+                self.accepted_min, self.accepted_max, self.accepted_avg,
             )
-            self.dropped, self.accepted, self.accepted_lengths, self.accepted_size = 0, 0, 0, 0
-        return dropped, accepted, accepted_lengths, accepted_size
+            (
+                self.dropped, self.accepted, self.accepted_sum,
+                self.accepted_min, self.accepted_max, self.accepted_avg,
+            ) = 0, 0, 0, 0, 0, 0
+        return dropped, accepted, accepted_sum, accepted_min, accepted_max, accepted_avg
 
     def _get(self):
         things = self.queue
