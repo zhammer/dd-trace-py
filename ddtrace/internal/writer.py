@@ -69,7 +69,14 @@ class AgentWriter(_worker.PeriodicWorkerThread):
     def run(self):
         # Always send the heartbeat metric
         if self.dogstatsd:
+            # Report liveliness for this tracer
             self.dogstatsd.gauge('datadog.tracer.heartbeat', 1)
+            # Increment a counter for number of writers we have
+            # DEV: This is as accurate as we can get since we might have
+            #  multiple writers per-process, using a gauge would basically
+            #  have them all collapsed into "1" since we don't have a
+            #  per-writer unique tag to add here (and shouldn't)
+            self.dogstatsd.increment('datadog.tracer.writers')
 
         try:
             traces = self._trace_queue.get(block=False)
