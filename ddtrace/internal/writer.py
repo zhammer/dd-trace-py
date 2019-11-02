@@ -134,6 +134,7 @@ class AgentWriter(_worker.PeriodicWorkerThread):
         # https://github.com/DataDog/datadogpy/issues/439
         if self._send_stats:
             # Statistics about this flush
+            self.dogstatsd.increment('datadog.tracer.flushes')
             self.dogstatsd.histogram('datadog.tracer.flush.traces', traces_flush_length)
             self.dogstatsd.increment('datadog.tracer.flush.traces.sum', traces_flush_length)
             self.dogstatsd.histogram('datadog.tracer.flush.spans', traces_flush_spans)
@@ -149,7 +150,7 @@ class AgentWriter(_worker.PeriodicWorkerThread):
             # DEV: No successful HTTP call was made
             errors = list(e for (e, p) in traces_responses if isinstance(e, Exception))
             for error_type, grouped_errors in itertools.groupby(sorted((type(error).__name__ for error in errors))):
-                self._flush_stats('api.responses', len(list(grouped_errors)), tags=['error:%s' % (error_type, )])
+                self._flush_stats('api.errors', len(list(grouped_errors)), tags=['error:%s' % (error_type, )])
 
             # HTTP API call response stats
             # DEV: Even `status:500` is marked as a response here and not an "api.errors"
