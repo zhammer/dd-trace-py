@@ -97,16 +97,16 @@ class AgentWriter(_worker.PeriodicWorkerThread):
         ) = self._trace_queue.reset_stats()
         self.dogstatsd.histogram('datadog.tracer.queue.dropped.traces', dropped)
         self.dogstatsd.increment('datadog.tracer.queue.dropped.traces.sum', dropped)
-        self.dogstatsd.histogram('datadog.tracer.queue.accepted.traces', accepted)
-        self.dogstatsd.increment('datadog.tracer.queue.accepted.traces.sum', accepted)
-        self.dogstatsd.gauge('datadog.tracer.queue.accepted.spans.sum', accepted_sum)
-        self.dogstatsd.gauge('datadog.tracer.queue.accepted.spans.min', accepted_min)
-        self.dogstatsd.gauge('datadog.tracer.queue.accepted.spans.max', accepted_max)
-        self.dogstatsd.gauge('datadog.tracer.queue.accepted.spans.avg', accepted_avg)
+        self.dogstatsd.histogram('datadog.tracer.queue.enqueued.traces', accepted)
+        self.dogstatsd.increment('datadog.tracer.queue.enqueued.traces.sum', accepted)
+        self.dogstatsd.gauge('datadog.tracer.queue.enqueued.spans.sum', accepted_sum)
+        self.dogstatsd.gauge('datadog.tracer.queue.enqueued.spans.min', accepted_min)
+        self.dogstatsd.gauge('datadog.tracer.queue.enqueued.spans.max', accepted_max)
+        self.dogstatsd.gauge('datadog.tracer.queue.enqueued.spans.avg', accepted_avg)
 
         # Statistics about the writer thread
         if hasattr(time, 'thread_time_ns'):
-            self.dogstatsd.histogram('datadog.tracer.writer.cpu_time', time.thread_time_ns())
+            self.dogstatsd.histogram('datadog.tracer.writer.cpu_time', time.thread_time())
 
     def flush_queue(self, traces):
         if self._send_stats:
