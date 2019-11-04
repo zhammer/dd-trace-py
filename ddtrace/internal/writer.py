@@ -35,6 +35,7 @@ class AgentWriter(_worker.PeriodicWorkerThread):
         self._filters = filters
         self._priority_sampler = priority_sampler
         self._last_error_ts = 0
+        self._last_thread_time = 0
         self.dogstatsd = dogstatsd
         self.api = api.API(hostname, port, uds_path=uds_path, https=https,
                            priority_sampling=priority_sampler is not None)
@@ -106,7 +107,10 @@ class AgentWriter(_worker.PeriodicWorkerThread):
 
         # Statistics about the writer thread
         if hasattr(time, 'thread_time_ns'):
-            self.dogstatsd.histogram('datadog.tracer.writer.cpu_time', time.thread_time())
+            current_thread_time = time.thread_time()
+            diff = current_thread_time - self._last_thread_time
+            self._last_thread_time = current_thread_time
+            self.dogstatsd.histogram('datadog.tracer.writer.cpu_time', diff)
 
     def flush_queue(self, traces):
         if self._send_stats:
