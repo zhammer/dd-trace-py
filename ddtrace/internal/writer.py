@@ -137,16 +137,23 @@ class AgentWriter(_worker.PeriodicWorkerThread):
 
             # Statistics about API
             self.dogstatsd.increment('datadog.tracer.api.requests', len(traces_responses))
-            self.dogstatsd.increment('datadog.tracer.api.errors',
-                                     len(list(t for t in traces_responses
-                                              if isinstance(t, Exception))))
+            for error, grouped_errors in itertools.groupby(
+                    sorted((type(e).__name__ for e in traces_responses if isinstance(e, Exception)))):
+                self.dogstatsd.increment('datadog.tracer.api.exceptions',
+                                         len(list(grouped_errors)),
+                                         tags=['error:%s' % error])
             for status, grouped_responses in itertools.groupby(
                     sorted((t for t in traces_responses if not isinstance(t, Exception)),
                            key=lambda r: r.status),
                     key=lambda r: r.status):
-                self.dogstatsd.increment('datadog.tracer.api.responses',
-                                         len(list(grouped_responses)),
-                                         tags=['status:%d' % status])
+                if 400 <= status < 600:
+                    self.dogstatsd.increment('datadog.tracer.api.error',
+                                             len(list(grouped_responses)),
+                                             tags=['status:%d' % status])
+                else:
+                    self.dogstatsd.increment('datadog.tracer.api.success',
+                                             len(list(grouped_responses)),
+                                             tags=['status:%d' % status])
 
             # Statistics about the writer thread
             if hasattr(time, 'thread_time_ns'):

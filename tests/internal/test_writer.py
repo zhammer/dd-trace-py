@@ -141,8 +141,7 @@ class AgentWriterTests(TestCase):
             mock.call('datadog.tracer.queue.accepted_lengths', 77),
             mock.call('datadog.tracer.traces.filtered', 0),
             mock.call('datadog.tracer.api.requests', 11),
-            mock.call('datadog.tracer.api.errors', 0),
-            mock.call('datadog.tracer.api.responses', 11, tags=['status:200']),
+            mock.call('datadog.tracer.api.success', 11, tags=['status:200']),
         ]
         if hasattr(time, 'thread_time_ns'):
             increment_calls.append(mock.call('datadog.tracer.writer.cpu_time', mock.ANY))
@@ -161,7 +160,7 @@ class AgentWriterTests(TestCase):
             mock.call('datadog.tracer.queue.accepted_lengths', 77),
             mock.call('datadog.tracer.traces.filtered', 0),
             mock.call('datadog.tracer.api.requests', 1),
-            mock.call('datadog.tracer.api.errors', 1),
+            mock.call('datadog.tracer.api.exceptions', 1, tags=['error:Exception']),
         ]
         if hasattr(time, 'thread_time_ns'):
             increment_calls.append(mock.call('datadog.tracer.writer.cpu_time', mock.ANY))
