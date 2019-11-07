@@ -147,11 +147,11 @@ class AgentWriter(_worker.PeriodicWorkerThread):
                            key=lambda r: r.status),
                     key=lambda r: r.status):
                 if 400 <= status < 600:
-                    self.dogstatsd.increment('datadog.tracer.api.error',
+                    self.dogstatsd.increment('datadog.tracer.api.errors',
                                              len(list(grouped_responses)),
                                              tags=['status:%d' % status])
                 else:
-                    self.dogstatsd.increment('datadog.tracer.api.success',
+                    self.dogstatsd.increment('datadog.tracer.api.successes',
                                              len(list(grouped_responses)),
                                              tags=['status:%d' % status])
 

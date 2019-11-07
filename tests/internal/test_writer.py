@@ -141,7 +141,7 @@ class AgentWriterTests(TestCase):
             mock.call('datadog.tracer.queue.accepted_lengths', 77),
             mock.call('datadog.tracer.traces.filtered', 0),
             mock.call('datadog.tracer.api.requests', 11),
-            mock.call('datadog.tracer.api.success', 11, tags=['status:200']),
+            mock.call('datadog.tracer.api.successes', 11, tags=['status:200']),
         ]
         if hasattr(time, 'thread_time_ns'):
             increment_calls.append(mock.call('datadog.tracer.writer.cpu_time', mock.ANY))
