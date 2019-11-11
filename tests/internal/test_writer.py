@@ -135,17 +135,19 @@ class AgentWriterTests(TestCase):
             mock.call('datadog.tracer.queue.length', 11),
             mock.call('datadog.tracer.queue.spans', 77),
         ] == self.dogstatsd.gauge.mock_calls
-        increment_calls = [
+        assert [
             mock.call('datadog.tracer.queue.dropped', 0),
             mock.call('datadog.tracer.queue.accepted', 11),
             mock.call('datadog.tracer.queue.accepted_lengths', 77),
             mock.call('datadog.tracer.traces.filtered', 0),
             mock.call('datadog.tracer.api.requests', 11),
             mock.call('datadog.tracer.api.successes', 11, tags=['status:200']),
-        ]
-        if hasattr(time, 'thread_time_ns'):
-            increment_calls.append(mock.call('datadog.tracer.writer.cpu_time', mock.ANY))
-        assert increment_calls == self.dogstatsd.increment.mock_calls
+        ] == self.dogstatsd.increment.mock_calls
+
+        histogram_calls = []
+        if hasattr(time, 'thread_time'):
+            histogram_calls.append(mock.call('datadog.tracer.writer.cpu_time', mock.ANY))
+        assert histogram_calls == self.dogstatsd.histogram.mock_calls
 
     def test_dogstatsd_failing_api(self):
         self.create_worker(api_class=FailingAPI, enable_stats=True)
@@ -154,17 +156,19 @@ class AgentWriterTests(TestCase):
             mock.call('datadog.tracer.queue.length', 11),
             mock.call('datadog.tracer.queue.spans', 77),
         ] == self.dogstatsd.gauge.mock_calls
-        increment_calls = [
+        assert [
             mock.call('datadog.tracer.queue.dropped', 0),
             mock.call('datadog.tracer.queue.accepted', 11),
             mock.call('datadog.tracer.queue.accepted_lengths', 77),
             mock.call('datadog.tracer.traces.filtered', 0),
             mock.call('datadog.tracer.api.requests', 1),
             mock.call('datadog.tracer.api.exceptions', 1, tags=['error:Exception']),
-        ]
-        if hasattr(time, 'thread_time_ns'):
-            increment_calls.append(mock.call('datadog.tracer.writer.cpu_time', mock.ANY))
-        assert increment_calls == self.dogstatsd.increment.mock_calls
+        ] == self.dogstatsd.increment.mock_calls
+
+        histogram_calls = []
+        if hasattr(time, 'thread_time'):
+            histogram_calls.append(mock.call('datadog.tracer.writer.cpu_time', mock.ANY))
+        assert histogram_calls == self.dogstatsd.histogram.mock_calls
 
 
 def test_queue_full():

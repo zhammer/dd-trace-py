@@ -140,7 +140,7 @@ class AgentWriter(_worker.PeriodicWorkerThread):
                                              tags=['status:%d' % status])
 
             # Statistics about the writer thread
-            if hasattr(time, 'thread_time_ns'):
+            if hasattr(time, 'thread_time'):
                 current_cpu_time = time.thread_time()
                 diff = current_cpu_time - self._last_cpu_time
                 self._last_cpu_time = current_cpu_time
