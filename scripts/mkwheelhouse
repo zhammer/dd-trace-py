@@ -9,12 +9,12 @@ S3_BUCKET = 'pypi.datadoghq.com'
 S3_DIR = os.environ['S3_DIR']
 
 
-# DEV: This is the same `mkwheelhouse.build_wheels` except we are running `python setup.py sdist` instead
+# DEV: This is the same `mkwheelhouse.build_wheels` except we are running our custom
+#   `scripts/build-dist` to build manylinux wheels
 def build_sdist():
     build_dir = tempfile.mkdtemp(prefix='mkwheelhouse-')
     args = [
-        'python', 'setup.py', 'sdist',
-        '--dist-dir', build_dir,
+        'scripts/build-dist', build_dir,
     ]
     mkwheelhouse.spawn(args)
     return build_dir

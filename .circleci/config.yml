@@ -644,9 +644,11 @@ jobs:
 
   deploy_dev:
     # build the master branch releasing development docs and wheels
-    executor: python38
+    # DEV: We need docker machine/remote docker so we can build manylinux wheels
+    machine: true
     steps:
       - checkout
+      - setup_remote_docker
       - setup_tox
       - run: sudo apt-get -y install rake
       - run: pip install tox mkwheelhouse awscli cython
@@ -878,4 +880,6 @@ workflows:
             - verify_all_tests_ran
           filters:
             branches:
-              only: master
+              only:
+                - master
+                - brettlangdon/deploy.dev.wheels
