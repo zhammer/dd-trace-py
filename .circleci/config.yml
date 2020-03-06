@@ -644,17 +644,27 @@ jobs:
 
   deploy_dev:
     # build the master branch releasing development docs and wheels
-    executor: python38
+    docker:
+      - image: docker:stable-git
     steps:
       - checkout
-      # DEV: We need remote docker so we can build manylinux wheels
-      - setup_remote_docker
       - setup_tox
-      - run: sudo apt-get -y install rake
       - run: pip install tox mkwheelhouse awscli cython
-      - run: tox -e docs
-      - run: S3_DIR=trace-dev rake release:docs
-      - run: S3_DIR=trace-dev rake release:wheel
+      - run:
+          name: Build docs
+          command: tox -e docs
+      - run:
+          name: Release docs to dev site
+          command: aws s3 cp --recursive docs/_build/html/ "s3://${S3_BUCKET:?}/${S3_DIR:?}/docs/"
+          environment:
+            S3_DIR: trace-dev
+            S3_BUCKET: pypi.datadoghq.com
+      - run:
+          name: Release wheels to dev site
+          command: ./scripts/mkwheelhouse
+          environment:
+            S3_DIR: trace-dev
+            S3_BUCKET: pypi.datadoghq.com
 
   jinja2:
     executor: ddtrace_dev
