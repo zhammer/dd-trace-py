@@ -644,6 +644,7 @@ jobs:
 
   deploy_dev:
     # build the master branch releasing development docs and wheels
+    executor: python38
     steps:
       - checkout
       # DEV: We need remote docker so we can build manylinux wheels
