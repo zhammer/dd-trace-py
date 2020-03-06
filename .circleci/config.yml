@@ -644,10 +644,9 @@ jobs:
 
   deploy_dev:
     # build the master branch releasing development docs and wheels
-    # DEV: We need docker machine/remote docker so we can build manylinux wheels
-    machine: true
     steps:
       - checkout
+      # DEV: We need remote docker so we can build manylinux wheels
       - setup_remote_docker
       - setup_tox
       - run: sudo apt-get -y install rake
