@@ -11,7 +11,7 @@ S3_DIR = os.environ['S3_DIR']
 
 # DEV: This is the same `mkwheelhouse.build_wheels` except we are running our custom
 #   `scripts/build-dist` to build manylinux wheels
-def build_sdist():
+def build_wheels():
     build_dir = tempfile.mkdtemp(prefix='mkwheelhouse-')
     args = [
         'scripts/build-dist', build_dir,
@@ -46,7 +46,7 @@ def run():
         bucket.put('<!DOCTYPE html><html></html>', 'index.html', acl=acl)
 
     index_url = bucket.generate_url('index.html')
-    build_dir = mkwheelhouse.build_wheels()
+    build_dir = build_wheels()
     bucket.sync(build_dir, acl=acl)
     bucket.put(make_index(bucket), key='index.html', acl=acl)
     shutil.rmtree(build_dir)
