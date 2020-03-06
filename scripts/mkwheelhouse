@@ -46,7 +46,7 @@ def run():
         bucket.put('<!DOCTYPE html><html></html>', 'index.html', acl=acl)
 
     index_url = bucket.generate_url('index.html')
-    build_dir = build_sdist()
+    build_dir = mkwheelhouse.build_wheels()
     bucket.sync(build_dir, acl=acl)
     bucket.put(make_index(bucket), key='index.html', acl=acl)
     shutil.rmtree(build_dir)
