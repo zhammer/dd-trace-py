@@ -33,7 +33,8 @@ commands:
       s3_dir:
         type: string
     steps:
-      - run: sudo apt-get install -y rake
+      - run: sudo apt-get install -y ruby
+      - run: gem install rake
       - run: pip install -U tox awscli virtualenv
       - run: tox -e docs
       - run: S3_DIR=<< parameters.s3_dir >> rake release:docs
@@ -41,7 +42,8 @@ commands:
   deploy_wheels:
     description: "Deploy wheels"
     steps:
-      - run: sudo apt-get install -y rake
+      - run: sudo apt-get install -y ruby
+      - run: gem install rake
       - run: pip3 install -U awscli cython mkwheelhouse
       - run: S3_DIR=trace-dev rake release:wheel
 
