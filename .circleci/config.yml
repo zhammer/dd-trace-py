@@ -33,17 +33,18 @@ commands:
       s3_dir:
         type: string
     steps:
-      - setup_tox
-      - run: sudo apt-get -y install rake
-      - run: pip install awscli
+      - run: apk add python3 ruby
+        run: gem install rake
+      - run: pip install -U tox awscli virtualenv
       - run: tox -e docs
       - run: S3_DIR=<< parameters.s3_dir >> rake release:docs
 
   deploy_wheels:
     description: "Deploy wheels"
     steps:
-      - run: sudo apt-get -y install rake
-      - run: pip install awscli cython mkwheelhouse
+      - run: apk add python3 ruby
+        run: gem install rake
+      - run: pip install -U awscli cython mkwheelhouse
       - run: S3_DIR=trace-dev rake release:wheel
 
   setup_tox:
@@ -667,7 +668,8 @@ jobs:
 
   deploy_master:
     # build the master branch releasing development docs and wheels
-    executor: python38
+    docker:
+      image: docker:stable-git
     steps:
       - checkout
       - deploy_docs:
@@ -675,7 +677,8 @@ jobs:
       - deploy_wheels
 
   deploy_staging:
-    executor: python38
+    docker:
+      image: docker:stable-git
     steps:
       - checkout
       - deploy_wheels
@@ -714,7 +717,8 @@ jobs:
 
   deploy_docs:
     # deploy official documentation
-    executor: python38
+    docker:
+      image: docker:stable-git
     steps:
       - checkout
       - deploy_docs:
@@ -907,4 +911,6 @@ workflows:
             - verify_all_tests_ran
           filters:
             branches:
-              only: staging
+              only:
+                - staging
+                - brettlangdon/mkwheelhouse.build.dists

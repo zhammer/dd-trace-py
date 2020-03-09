@@ -37,3 +37,9 @@ docker run -it --rm -v "${PARENT_DIR}:/dd-trace-py" -e "ARCH=x86_64" quay.io/pyp
 
 # Build i686 linux and manylinux wheels
 docker run -it --rm -v "${PARENT_DIR}:/dd-trace-py" -e "ARCH=i686" quay.io/pypa/manylinux1_i686 linux32 /bin/bash -c "${build_script}"
+
+# If they gave us an alternative destination, then move the built files
+if [ -n "${1}" ];
+then
+    mv $DIST_DIR/*.{whl,tar.gz} "${1}"
+fi
