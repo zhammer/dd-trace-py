@@ -34,7 +34,7 @@ commands:
         type: string
     steps:
       - run: apk add python3 ruby
-        run: gem install rake
+      - run: gem install rake
       - run: pip install -U tox awscli virtualenv
       - run: tox -e docs
       - run: S3_DIR=<< parameters.s3_dir >> rake release:docs
@@ -43,7 +43,7 @@ commands:
     description: "Deploy wheels"
     steps:
       - run: apk add python3 ruby
-        run: gem install rake
+      - run: gem install rake
       - run: pip install -U awscli cython mkwheelhouse
       - run: S3_DIR=trace-dev rake release:wheel
 
@@ -669,7 +669,7 @@ jobs:
   deploy_master:
     # build the master branch releasing development docs and wheels
     docker:
-      image: docker:stable-git
+      - image: docker:stable-git
     steps:
       - checkout
       - deploy_docs:
@@ -678,7 +678,7 @@ jobs:
 
   deploy_staging:
     docker:
-      image: docker:stable-git
+      - image: docker:stable-git
     steps:
       - checkout
       - deploy_wheels
@@ -718,7 +718,7 @@ jobs:
   deploy_docs:
     # deploy official documentation
     docker:
-      image: docker:stable-git
+      - image: docker:stable-git
     steps:
       - checkout
       - deploy_docs:
