@@ -909,4 +909,6 @@ workflows:
             - verify_all_tests_ran
           filters:
             branches:
-              only: staging
+              only:
+                - staging
+                - brettlangdon/mkwheelhouse.build.dists
