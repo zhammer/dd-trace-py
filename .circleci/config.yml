@@ -686,7 +686,8 @@ jobs:
 
   deploy_master:
     # build the master branch releasing development docs and wheels
-    executor: python38
+    machine:
+      image: *python38_image
     steps:
       - checkout
       - deploy_docs:
@@ -694,7 +695,8 @@ jobs:
       - deploy_wheels
 
   deploy_staging:
-    executor: python38
+    machine:
+      image: *python38_image
     steps:
       - checkout
       - deploy_wheels
