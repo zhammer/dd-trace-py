@@ -1,6 +1,7 @@
 import atexit
 import threading
 import os
+import sys
 
 from .internal.logger import get_logger
 
@@ -66,8 +67,18 @@ class PeriodicWorkerThread(object):
 
     def _target(self):
         while not self._stop.wait(self.interval):
-            self.run_periodic()
-        self._on_shutdown()
+            try:
+                self.run_periodic()
+            except:
+                if self._thread.daemon and sys is None:
+                    return
+                raise
+        try:
+            self._on_shutdown()
+        except:
+            if self._thread.daemon and sys is None:
+                return
+            raise
 
     @staticmethod
     def run_periodic():

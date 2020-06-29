@@ -63,15 +63,10 @@ class RuntimeWorker(_worker.PeriodicWorkerThread):
         self._runtime_metrics = RuntimeMetrics()
 
     def flush(self):
-        try:
-            with self._statsd_client:
-                for key, value in self._runtime_metrics:
-                    log.debug("Writing metric %s:%s", key, value)
-                    self._statsd_client.gauge(key, value)
-        except:
-            if self._thread.daemon and sys is None:
-                return
-            raise
+        with self._statsd_client:
+            for key, value in self._runtime_metrics:
+                log.debug("Writing metric %s:%s", key, value)
+                self._statsd_client.gauge(key, value)
 
     run_periodic = flush
     on_shutdown = flush
